@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="SQL Server (Microsoft) - booklibrary.anrishitsko@195.50.2.71" uuid="81631601-584b-4357-9925-2c50eccdd3fb">
+      <secret-storage>master_key</secret-storage>
+      <user-name>belstu_db_user</user-name>
+    </data-source>
+  </component>
+</project>

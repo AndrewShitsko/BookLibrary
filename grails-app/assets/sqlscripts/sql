@@ -1,0 +1,40 @@
+create table [Users]
+(
+	Id int primary key identity,
+	Username nvarchar(256) unique not null,
+	[Password] nvarchar(max) not null,
+	Salt nvarchar(max) not null,
+	Email nvarchar(256) unique not null,
+	Firstname nvarchar(max) not null,
+	Lastname nvarchar(max) not null,
+	Middlename nvarchar(max) not null,
+	CreatedAt datetime not null
+);
+create table [Roles]
+(
+  Id int primary key identity,
+  [Name] nvarchar(256) unique not null
+);
+create table [UserRoles]
+(
+  Id int primary key identity,
+  UserId int references [Users] (Id) not null,
+  RoleId int references [Roles] (Id) not null
+);
+create table [BookCategories]
+(
+	Id int primary key identity,
+	[Name] nvarchar(max) not null
+);
+create table [Books]
+(
+	Id int primary key identity,
+	Title nvarchar(max) not null,
+	Author nvarchar(max) not null,
+	[Description] nvarchar(max) not null,
+	PublishYear int not null,
+	BookPath nvarchar(max) not null,
+	IsPublic bit not null,
+	CategoryId int references [BookCategories] (Id) not null,
+	UserId int references [Users] (Id) not null
+);
