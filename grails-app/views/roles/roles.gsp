@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Users</title>
+    <title>Roles</title>
 
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
 </head>
@@ -19,48 +19,38 @@
 
 <div id="content" role="main">
     <section class="row colset-2-its">
-        <h1>Users</h1>
+        <h1>Roles</h1>
         <table class="table">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Username</th>
-                    <th>Fullname</th>
-                    <th>Email</th>
-                    <th>Creating date</th>
-                    <th style="width: 5%"></th>
+                    <th>Name</th>
                     <th style="width: 5%"></th>
                     <th style="width: 5%"></th>
                 </tr>
             </thead>
             <tbody>
-                <g:each in="${users}" var="user">
+                <g:each in="${roles}" var="role">
                     <tr>
-                        <td>${user.id}</td>
-                        <td>${user.username}</td>
-                        <td>${user.firstname} ${user.lastname} ${user.middlename}</td>
-                        <td>${user.email}</td>
-                        <td>${user.createdAt}</td>
+                        <td>${role.id}</td>
+                        <td>${role.name}</td>
                         <td>
-                            <a class="btn btn-info" href="/admin/users/roles/${user.id}" title="Roles management"><i class="fa fa-user-plus"></i></a>
+                            <a class="btn btn-success" href="/admin/roles/edit/${role.id}" title="Edit role"><i class="fa fa-pencil fa-fw"></i></a>
                         </td>
                         <td>
-                            <a class="btn btn-success" href="/admin/users/edit/${user.id}" title="Edit user"><i class="fa fa-pencil fa-fw"></i></a>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger" title="Delete user" data-toggle="modal" data-target="#deleteUserModal-${user.id}">
+                            <button class="btn btn-danger" title="Delete role" data-toggle="modal" data-target="#deleteRoleModal-${role.id}">
                                 <i class="fa fa-trash-o fa-fw"></i>
                             </button>
                         </td>
-                        <div class="modal fade" id="deleteUserModal-${user.id}" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel">
+                        <div class="modal fade" id="deleteRoleModal-${role.id}" tabindex="-1" role="dialog" aria-labelledby="deleteRoleModalLabel">
                             <div class="modal-dialog">
                                 <div class="modal-content" role="document">
                                     <div class="modal-body">
-                                        Are you really want to delete the user?
+                                        Are you really want to delete the role?
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                        <g:link class="btn btn-danger" controller="users" action="deleteUser" id="${user.id}">Delete</g:link>
+                                        <g:link class="btn btn-danger" controller="roles" action="deleteRole" id="${role.id}">Delete</g:link>
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +59,7 @@
                 </g:each>
             </tbody>
         </table>
-        <a href="/admin/users/add" type="button" class="btn btn-primary">Add user</a>
+        <a href="/admin/roles/add" type="button" class="btn btn-primary">Add role</a>
     </section>
 </div>
 </body>

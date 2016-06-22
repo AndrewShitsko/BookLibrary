@@ -1,35 +1,39 @@
+import booklibrary.Role
 import booklibrary.User
+import booklibrary.UserRole
 
 class UsersController {
 
+    def usersService
+    def rolesService
+    def authService
+
     def index() {
-        def users = User.findAll()
+        def users = usersService.getUsers()
         render(view: "users", model: [users: users])
     }
 
     def addUser() {
-        if (User.findByUsername(params.username)) {
+        if (usersService.getUserByUsername(params.username)) {
             flash.message = "User with this login already exists"
             flash.code = "danger"
         }
-        else if (User.findByEmail(params.email)) {
+        else if (usersService.getUserByEmail(params.email)) {
             flash.message = "User with this email already exists"
             flash.code = "danger"
         }
         else {
-            PasswordHelper.SaltHash saltHash = PasswordHelper.computeHashWithSalt(params.password)
-            long now = new Date().getTime()
-            def user = new User(username: params.username,
-                    password: saltHash.getHash(),
-                    salt: saltHash.getSalt(),
-                    email: params.email,
-                    firstname: params.firstname,
-                    lastname: params.lastname,
-                    middlename: params.middlename,
-                    createdAt: now)
-            if (user.save()) {
+            if (usersService.addUser(
+                    params.username,
+                    params.password,
+                    params.email,
+                    params.firstname,
+                    params.lastname,
+                    params.middlename)) {
+
                 flash.message = "User is created"
                 flash.code = "success"
+
             } else {
                 flash.message = "An error has occurred. Please try again later or check your entries"
                 flash.code = "danger"
@@ -39,49 +43,66 @@ class UsersController {
     }
 
     def edit() {
-        def user = User.get(params.id)
+        def user = usersService.getUser(params.id)
         render(view: "edit", model: [user: user])
     }
 
     def updateUser() {
-        def user = User.get(params.id)
-        if (user) {
-            user.email = params.email
-            user.firstname = params.firstname
-            user.lastname = params.lastname
-            user.middlename = params.middlename
-            if (user.save()) {
-                flash.message = "User is updated"
-                flash.code = "success"
-            } else {
-                flash.message = "An error has occurred. Please try again later or check your entries"
-                flash.code = "danger"
-            }
+        if (usersService.updateUser(params.id, params.email, params.firstname, params.lastname, params.middlename)) {
+            flash.message = "User is updated"
+            flash.code = "success"
         } else {
-            flash.message = "User doesn't exist"
+            flash.message = "An error has occurred. Please try again later or check your entries"
             flash.code = "danger"
         }
         redirect(uri: "/admin/users")
     }
 
     def deleteUser() {
-        def user = User.get(params.id)
-        if (user) {
-            user.delete()
-            def checkUser = User.get(params.id)
-            if (!checkUser) {
-                if (session.user == user)
-                    session.user = null
-                flash.message = "User is deleted"
+        if (usersService.deleteUser(params.id)) {
+            flash.message = "User is deleted"
+            flash.code = "success"
+
+            authService.logout(session, params.id)
+
+        } else {
+            flash.message = "An error has occurred. Please try again later or check your entries"
+            flash.code = "danger"
+        }
+        redirect(uri: "/admin/users")
+    }
+
+    def roles() {
+        def roles = rolesService.getRoles()
+        def userRoles = usersService.getUserRoles(params.id)
+        def currentUser = usersService.getUser(params.id)
+        render(view: "roles", model: [roles: roles, userRoles: userRoles, user: currentUser])
+    }
+
+    def grantRole() {
+        if (!usersService.getUserRole(params.id, params.roleId)) {
+            if (usersService.grantRole(params.id, params.roleId)) {
+                flash.message = "Role is granted"
                 flash.code = "success"
             } else {
                 flash.message = "An error has occurred. Please try again later or check your entries"
                 flash.code = "danger"
             }
         } else {
-            flash.message = "User doesn't exist"
+            flash.message = "Role has already granted to the user"
             flash.code = "danger"
         }
-        redirect(uri: "/admin/users")
+        redirect(action: "roles", id: params.id)
+    }
+
+    def revokeRole() {
+        if (usersService.revokeRole(params.userId, params.roleId)) {
+            flash.message = "Role is revoked"
+            flash.code = "success"
+        } else {
+            flash.message = "An error has occurred. Please try again later"
+            flash.code = "danger"
+        }
+        redirect(action: "roles", id: params.userId)
     }
 }

@@ -37,6 +37,17 @@
         </div>
     </div>
 
+    <g:if test="${flash.message}">
+        <div class="row">
+            <div class="alert alert-${flash.code}" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <i class="fa fa-close"></i>
+                </button>
+                ${flash.message}
+            </div>
+        </div>
+    </g:if>
+
     <g:layoutBody/>
 
     <asset:javascript src="application.js"/>
