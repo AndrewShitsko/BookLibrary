@@ -20,7 +20,7 @@
 <div id="content" role="main">
     <section class="row colset-2-its">
         <h3>Edit user</h3>
-        <g:form controller="users" action="updateUser" id="${user.id}">
+        <g:form controller="users" action="updateUser" id="${user.id}" name="userForm">
             <div class="form-group">
                 <label for="inputEmail">Email</label>
                 <input type="text" class="form-control" id="inputEmail" name="email" placeholder="Email" value="${user.email}"/>

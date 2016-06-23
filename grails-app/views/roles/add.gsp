@@ -20,7 +20,7 @@
 <div id="content" role="main">
     <section class="row colset-2-its">
         <h3>Add a new role</h3>
-        <g:form controller="roles" action="addRole">
+        <g:form controller="roles" action="addRole" name="roleForm">
             <div class="form-group">
                 <label for="inputName">Name</label>
                 <input type="text" class="form-control" id="inputName" name="name" placeholder="Name"/>

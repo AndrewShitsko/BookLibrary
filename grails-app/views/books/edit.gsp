@@ -34,7 +34,7 @@
 <div id="content" role="main">
     <section class="row colset-2-its">
         <h3>Add a new book</h3>
-        <g:form controller="books" action="updateBook" id="${session.user.id}">
+        <g:form controller="books" action="updateBook" id="${book.id}" name="bookForm">
             <div class="form-group">
                 <label for="inputTitle">Title</label>
                 <input type="text" class="form-control" id="inputTitle" name="title" placeholder="Title" value="${book.title}"/>

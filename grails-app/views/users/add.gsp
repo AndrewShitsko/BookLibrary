@@ -20,7 +20,7 @@
 <div id="content" role="main">
     <section class="row colset-2-its">
         <h3>Add a new user</h3>
-        <g:form controller="users" action="addUser">
+        <g:form controller="users" action="addUser" name="userForm">
             <div class="form-group">
                 <label for="inputUsername">Username</label>
                 <input type="text" class="form-control" id="inputUsername" name="username" placeholder="Username"/>

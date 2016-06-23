@@ -34,7 +34,7 @@
 <div id="content" role="main">
     <section class="row colset-2-its">
         <h3>Add a new book</h3>
-        <g:form controller="books" action="addBook" id="${session.user.id}">
+        <g:form controller="books" action="addBook" id="${session.user.id}" name="bookForm">
             <div class="form-group">
                 <label for="inputTitle">Title</label>
                 <input type="text" class="form-control" id="inputTitle" name="title" placeholder="Title"/>
@@ -53,7 +53,7 @@
             </div>
             <div class="form-group">
                 <label for="inputBookUrl">Book url</label>
-                <input type="url" class="form-control" id="inputBookUrl" name="bookUrl" placeholder="Book url" />
+                <input type="text" class="form-control" id="inputBookUrl" name="bookUrl" placeholder="Book url" />
             </div>
             <button type="submit" class="btn btn-primary">Save</button>
             <a href="/" class="btn btn-default">Cancel</a>

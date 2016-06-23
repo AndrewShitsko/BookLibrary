@@ -574,48 +574,15 @@ img.grails-logo {
     margin-top:-10px;
 }
 
-.books {
-    margin: 20px 0 20px 0;
+label.error {
+    display: block;
+    float: none;
+    color: #d9534f;
+    vertical-align: top;
 }
-.books .list {
-    margin-bottom: 20px;
-}
-.books .list a {
-    text-decoration: none;
-}
-.books .list .preview {
-    width: 95px;
-    height: 100px;
-    margin-right: 10px;
-    float: left;
-    overflow: hidden;
-}
-.books .list .preview .fa-7x {
-    font-size: 7em;
-}
-.books .list .info {
-    display: table-cell;
-}
-.books .list .info p {
-    margin: 0;
-}
-.books .list .info .title {
-    font-weight: bold;
-}
-.books .list .info .edit:hover {
-    color: #346635;
-}
-.books .list .info .delete {
-    cursor: pointer;
-}
-.books .list .info .delete:hover {
-    color: #953b39;
-}
-.books .list .info .favorite:hover {
-    color: #c09853;
-}
-.books .list .info .category:hover {
-    color: #a78400;
+
+label.error i {
+    margin-right: 5px;
 }
 
 

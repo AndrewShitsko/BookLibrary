@@ -9,7 +9,7 @@
 <body>
     <div id="content" role="main">
         <div class="col-md-4 col-md-offset-4">
-            <g:form controller="auth" action="login">
+            <g:form controller="auth" action="login" name="loginForm">
                 <div class="form-group">
                     <label for="inputUsername">Username</label>
                     <input type="text" class="form-control" id="inputUsername" name="username" placeholder="Username"/>
