@@ -4,7 +4,7 @@ class UrlMappings {
 
     static mappings = {
         "/$controller/$action?/$id?(.$format)?"()
-        "/"(view:"/index")
+        "/"(controller: "books")
         "403"(view:'/forbidden')
         "404"(view:'/notFound')
         "500"(view:'/error')
@@ -14,8 +14,6 @@ class UrlMappings {
         group("/admin") {
             "/"(controller: "users")
             "/users/$action?/$id?(.$format)?"(controller: "users")
-            "/users/add"(view: "/users/add")
-            "/roles/add"(view: "/roles/add")
             "/roles/$action?/$id?(.$format)?"(controller: "roles")
         }
     }

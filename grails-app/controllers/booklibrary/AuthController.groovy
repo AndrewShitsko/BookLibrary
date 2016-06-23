@@ -8,14 +8,12 @@ class AuthController {
     }
 
     def login() {
-        if (!session.user) {
-            if (authService.login(session, params.username, params.password)) {
-                flash.message = "Login succeed"
-                flash.code = "success"
-            } else {
-                flash.message = "Login failed"
-                flash.code = "danger"
-            }
+        if (authService.login(session, params.username, params.password)) {
+            flash.message = "Login succeed"
+            flash.code = "success"
+        } else {
+            flash.message = "Login failed"
+            flash.code = "danger"
         }
         redirect(uri: "/")
     }

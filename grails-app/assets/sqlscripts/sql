@@ -21,11 +21,6 @@ create table [UserRoles]
   UserId int references [Users] (Id) not null,
   RoleId int references [Roles] (Id) not null
 );
-create table [BookCategories]
-(
-	Id int primary key identity,
-	[Name] nvarchar(max) not null
-);
 create table [Books]
 (
 	Id int primary key identity,
@@ -33,8 +28,6 @@ create table [Books]
 	Author nvarchar(max) not null,
 	[Description] nvarchar(max) not null,
 	PublishYear int not null,
-	BookPath nvarchar(max) not null,
-	IsPublic bit not null,
-	CategoryId int references [BookCategories] (Id) not null,
+	BookUrl nvarchar(max) not null,
 	UserId int references [Users] (Id) not null
 );

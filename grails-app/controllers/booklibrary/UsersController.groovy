@@ -1,6 +1,3 @@
-import booklibrary.Role
-import booklibrary.User
-import booklibrary.UserRole
 
 class UsersController {
 
@@ -11,6 +8,10 @@ class UsersController {
     def index() {
         def users = usersService.getUsers()
         render(view: "users", model: [users: users])
+    }
+
+    def add() {
+        render(view: "add")
     }
 
     def addUser() {

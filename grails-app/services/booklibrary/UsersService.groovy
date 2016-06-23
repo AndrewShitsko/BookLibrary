@@ -1,3 +1,4 @@
+import booklibrary.Book
 import booklibrary.User
 import booklibrary.UserRole
 import grails.transaction.Transactional
@@ -74,7 +75,10 @@ public class UsersService {
         try {
             def user = getUser(id)
             if (user) {
-                revokeRoles(id, true)
+
+                revokeRoles(id, true) // revoke all user's roles
+                deleteUserBooks(id) // remove all user's books
+
                 user.delete()
                 result = true
             }
@@ -154,10 +158,35 @@ public class UsersService {
     public boolean hasRole(user, String rolename) {
         def result = false
         try {
-            def userRoles = getUserRoles(user.id);
-            if (userRoles) {
-                if (userRoles.find {i -> i.name == rolename})
-                    result = true
+            if (user) {
+                def userRoles = getUserRoles(user.id);
+                if (userRoles) {
+                    if (userRoles.find { i -> i.name == rolename })
+                        result = true
+                }
+            }
+        } catch (e) {
+            e.printStackTrace()
+        }
+        return result
+    }
+
+    public boolean hasAnyRoles(user, rolenames) {
+        return rolenames.any {i -> hasRole(user, i)}
+    }
+
+    public def getUserBooks(userId) {
+        Book.findAllByUserId(userId)
+    }
+
+    public def deleteUserBooks(userId) {
+        def result = false
+        try {
+            def userBooks = getUserBooks(userId)
+            if (userBooks) {
+                for(userBook in userBooks)
+                    userBook.delete()
+                result = true
             }
         } catch (e) {
             e.printStackTrace()

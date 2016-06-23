@@ -3,6 +3,8 @@ package booklibrary
 
 class RolesInterceptor {
 
+    def usersService
+
     public RolesInterceptor() {
         match(controller: "roles")
     }

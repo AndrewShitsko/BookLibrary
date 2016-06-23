@@ -9,6 +9,10 @@ class RolesController {
         render(view: "roles", model: [roles: roles])
     }
 
+    def add() {
+        render(view: "add")
+    }
+
     def addRole() {
         if (rolesService.getRoleByName(params.name)) {
             flash.message = "Role with this name already exists"

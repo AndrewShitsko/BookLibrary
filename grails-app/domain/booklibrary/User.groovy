@@ -9,7 +9,7 @@ class User {
     }
 
     static constraints = {
-        username(nullable: false)
+        username(blank: false)
     }
 
     Integer id

@@ -4,12 +4,12 @@ package booklibrary
 class AuthInterceptor {
 
     public AuthInterceptor() {
-        match(controller: "auth")
+        match(controller: "auth").except(action: "logout")
     }
 
     boolean before() {
-        if (!session.user) {
-            redirect(uri: "/login")
+        if (session.user) {
+            redirect(uri: "/")
             return false
         }
         true

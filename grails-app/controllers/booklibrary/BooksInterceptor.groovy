@@ -1,19 +1,19 @@
 package booklibrary
 
-class UsersInterceptor {
+class BooksInterceptor {
 
     def usersService
 
-    public UsersInterceptor() {
-        match(controller: "users")
+    public BooksInterceptor() {
+        match(controller: "books").except(uri: "/", action: "index")
     }
 
     boolean before() {
         if (!session.user) {
             redirect(uri: "/login")
             return false
-        } else if(!usersService.hasRole(session.user, "Admin")) {
-            flash.error = "Page is only for administrators"
+        } else if(!usersService.hasAnyRoles(session.user, ["Admin", "Editor"])) {
+            flash.error = "Page is only for administrators or editors"
             render(status: 403)
             return false
         }
