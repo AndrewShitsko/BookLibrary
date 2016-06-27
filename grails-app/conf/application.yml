@@ -15,13 +15,13 @@ dataSource:
 environments:
     development:
         dataSource:
-            url: jdbc:sqlserver://195.50.2.71:1433;databaseName=booklibrary.anrishitsko
+            url: # type here db url
     test:
         dataSource:
-            url: jdbc:sqlserver://195.50.2.71:1433;databaseName=booklibrary.anrishitsko
+            url: # type here db url
     production:
         dataSource:
-            url: jdbc:sqlserver://195.50.2.71:1433;databaseName=booklibrary.anrishitsko
+            url: # type here db url
             properties:
                 jmxEnabled: true
                 initialSize: 5
